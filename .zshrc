@@ -9,6 +9,9 @@ bindkey -e
 # The following lines were added by compinstall
 zstyle :compinstall filename '/home/grepz/.zshrc'
 
+autoload -U colors
+colors
+
 autoload -Uz compinit
 compinit
 # End of lines added by compinstall
@@ -34,6 +37,7 @@ if [[ "$TERM" != emacs ]]; then
     [[ -z "$terminfo[kcuf1]" ]] || bindkey -M viins "$terminfo[kcuf1]" vi-forward-char
     [[ -z "$terminfo[kcub1]" ]] || bindkey -M viins "$terminfo[kcub1]" vi-backward-char
 
+# ncurses fogyatekos
     [[ "$terminfo[kcuu1]" == "^[O"* ]] && bindkey -M viins "${terminfo[kcuu1]/O/[}" vi-up-line-or-history
     [[ "$terminfo[kcud1]" == "^[O"* ]] && bindkey -M viins "${terminfo[kcud1]/O/[}" vi-down-line-or-history
     [[ "$terminfo[kcuf1]" == "^[O"* ]] && bindkey -M viins "${terminfo[kcuf1]/O/[}" vi-forward-char
@@ -48,6 +52,8 @@ autoload -Uz compinit promptinit
 promptinit
 prompt walters green
 
-PATH=$PATH:~/arm-none-eabi/bin:/opt/bin
-LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
-LD_PATH=$LD_PATH:/usr/local/lib
+PATH=$PATH:~/arm-none-eabi/bin:/opt/bin:~/bin:~/altera/13.1/quartus/bin:/sbin
+LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib:~/lib
+LD_PATH=$LD_PATH:/usr/local/lib:~/lib
+
+#export TERM=screen-256color
