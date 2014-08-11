@@ -1,4 +1,4 @@
-;; -*-lisp-*-
+;; -*- mode:lisp -*-
 
 (in-package :stumpwm)
 
