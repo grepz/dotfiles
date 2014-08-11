@@ -2,6 +2,13 @@
 
 (in-package :stumpwm)
 
+;; Load system tray
+(load "/home/grepz/source/common-lisp/stumpwm/contrib/stumptray.lisp")
+(load "/home/grepz/source/common-lisp/stumpwm/contrib/wifi-stat.lisp")
+(load "/home/grepz/source/common-lisp/stumpwm/contrib/weather.lisp")
+
+(setq *openweather-loc-defaults* '("Irkutsk,ru" "Shelehov,ru"))
+
 ;; change the prefix key to something else
 (set-prefix-key (kbd "C-t"))
 
@@ -12,6 +19,53 @@
     (when cmd
       (eval-command cmd t))))
 
+;; Message window font
+(set-font "-xos4-terminus-medium-r-normal--16-140-72-72-c-80-iso8859-15")
+
+(defcommand firefox () ()
+  (run-or-raise "firefox" '(:class "Web")))
+
+(define-frame-preference "Emacs"
+    (1 t t :restore "emacs-editing-dump" :title "...xdvi")
+    (0 t t :create "emacs-dump" :class "Emacs"))
+
+;; Window list format
+(setf *window-format* "^B%m%n^b %40t  ")
+
+;; width in pixels given to the borders of windows with maxsize or ratio
+;; hints
+(setf *maxsize-border-width* 1)
+;; width in pixels given to the borders of transient or pop-up windows
+(setf *transient-border-width* 1)
+;; width in pixels given to the borders of regular windows
+(setf *normal-border-width* 1)
+;; Set focus with mouse
+(setf *mouse-focus-policy* :click)
+
+;; Mode-line
+
+(defun show-time ()
+  (multiple-value-bind (second minute hour date month year
+			       day-of-week dst-p tz) (get-decoded-time)
+    (format nil "~2,'0d:~2,'0d:~2,'0d ~d/~2,'0d/~d"
+	    hour minute second date month year)))
+
+(setf stumpwm:*mode-line-timeout* 1)
+(setf stumpwm:*screen-mode-line-format*
+      (list "[^B%n^b] " "<^[^20" '(:eval (show-time)) "^]>, ^[^60%I^]: %W"))
+
+(stumpwm:toggle-mode-line (stumpwm:current-screen) (stumpwm:current-head))
+
+;; Load swank
+(load "/usr/share/common-lisp/source/slime/swank-loader.lisp")
+(swank-loader:init)
+
+(defcommand swank () ()
+	    (swank:create-server :port 45555
+				 :style swank:*communication-style*
+				 :dont-close t)
+	    (echo-string (current-screen)
+ "Starting swank. M-x slime-connect RET RET, then (in-package stumpwm)."))
 
 ;; Use xev to get keysym's
 (define-keysym #x1008ff13 "XF86AudioRaiseVolume")
@@ -30,58 +84,7 @@
 
 (define-key *top-map* (kbd "Print") "exec scrot")
 
-(define-key *root-map* (kbd "b")   "exec firefox")
+(define-key *root-map* (kbd "b")   "firefox")
 (define-key *root-map* (kbd "C-s") "colon1 exec urxvt -e ssh ")
 (define-key *root-map* (kbd "l")   "exec xtrlock")
 (define-key *root-map* (kbd "c")   "exec urxvt")
-
-;; Message window font
-(set-font "-xos4-terminus-medium-r-normal--16-140-72-72-c-80-iso8859-15")
-
-(clear-window-placement-rules)
-
-(define-frame-preference "Emacs"
-  (1 t t :restore "emacs-editing-dump" :title "...xdvi")
-  (0 t t :create "emacs-dump" :class "Emacs"))
-
-(define-frame-preference "Web"
-  (0 t   t :class "Firefox"))
-
-(define-frame-preference "Media"
-  (0 t   t :instance "aumix")
-  (0 t   t :class "MPlayer")
-  (0 t   t :class "VLC")
-  (0 t   t :class "Avidemux"))
-
-;; Window list format
-(setf *window-format* "^B%m%n^b %40t  ")
-
-;; width in pixels given to the borders of windows with maxsize or ratio
-;; hints
-(setf *maxsize-border-width* 1)
-
-;; width in pixels given to the borders of transient or pop-up windows
-(setf *transient-border-width* 1)
-
-;; width in pixels given to the borders of regular windows
-(setf *normal-border-width* 1)
-
-;; Set focus with mouse
-(setf *mouse-focus-policy* :click)
-
-;; Mode-line
-
-(defun show-time ()
-  (multiple-value-bind
-	(second minute hour date month year day-of-week dst-p tz)
-      (get-decoded-time)
-    (format nil "~2,'0d:~2,'0d ~d/~2,'0d/~d" hour minute date month year)))
-
-(stumpwm:toggle-mode-line (stumpwm:current-screen)
-                          (stumpwm:current-head))
-
-(setf stumpwm:*mode-line-background-color* "Black"
-      stumpwm:*mode-line-border-color*     "Black")
-
-(setf stumpwm:*screen-mode-line-format*
-      (list "<"(show-time) "> [^B%n^b]: %W"))
