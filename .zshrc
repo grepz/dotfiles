@@ -2,11 +2,17 @@
 HISTFILE=~/.histfile
 HISTSIZE=10000
 SAVEHIST=100000
+
+# Exclude command dups in history file
+setopt hist_ignore_all_dups
 setopt appendhistory extendedglob notify
 unsetopt autocd beep nomatch
 bindkey -e
-# End of lines configured by zsh-newuser-install
-# The following lines were added by compinstall
+
+# Autocd to dir when writing '/dir', no need to 'cd /dir'
+setopt autocd
+
+# compinit
 zstyle :compinstall filename '/home/grepz/.zshrc'
 
 autoload -U colors
@@ -14,7 +20,10 @@ colors
 
 autoload -Uz compinit
 compinit
-# End of lines added by compinstall
+
+zstyle ':completion:*:descriptions' format '%U%B%d%b%u'
+zstyle ':completion:*:warnings' format '%BNo matches for: %d%b'
+# end
 
 alias ls='ls --color=auto'
 alias mmake='make -j4'
@@ -48,9 +57,9 @@ if [[ "$TERM" != emacs ]]; then
     [[ "$terminfo[kend]" == "^[O"* ]] && bindkey -M emacs "${terminfo[kend]/O/[}" end-of-line
 fi
 
-autoload -Uz compinit promptinit
+autoload -Uz promptinit
 promptinit
-prompt walters green
+prompt gentoo
 
 PATH=$PATH:~/arm-none-eabi/bin:/opt/bin:~/bin:~/altera/13.1/quartus/bin:/sbin
 LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib:~/lib
