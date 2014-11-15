@@ -13,7 +13,7 @@ bindkey -e
 setopt autocd
 
 # compinit
-zstyle :compinstall filename '/home/grepz/.zshrc'
+zstyle :compinstall filename '~/.zshrc'
 
 autoload -U colors
 colors
@@ -25,44 +25,20 @@ zstyle ':completion:*:descriptions' format '%U%B%d%b%u'
 zstyle ':completion:*:warnings' format '%BNo matches for: %d%b'
 # end
 
-alias ls='ls --color=auto'
+alias ls='ls -G'
 alias mmake='make -j4'
 alias em='emacs -Q -nw'
 
-if [[ "$TERM" != emacs ]]; then
-    [[ -z "$terminfo[kdch1]" ]] || bindkey -M emacs "$terminfo[kdch1]" delete-char
-    [[ -z "$terminfo[khome]" ]] || bindkey -M emacs "$terminfo[khome]" beginning-of-line
-    [[ -z "$terminfo[kend]" ]] || bindkey -M emacs "$terminfo[kend]" end-of-line
-    [[ -z "$terminfo[kich1]" ]] || bindkey -M emacs "$terminfo[kich1]" overwrite-mode
-    [[ -z "$terminfo[kdch1]" ]] || bindkey -M vicmd "$terminfo[kdch1]" vi-delete-char
-    [[ -z "$terminfo[khome]" ]] || bindkey -M vicmd "$terminfo[khome]" vi-beginning-of-line
-    [[ -z "$terminfo[kend]" ]] || bindkey -M vicmd "$terminfo[kend]" vi-end-of-line
-    [[ -z "$terminfo[kich1]" ]] || bindkey -M vicmd "$terminfo[kich1]" overwrite-mode
-
-    [[ -z "$terminfo[cuu1]" ]] || bindkey -M viins "$terminfo[cuu1]" vi-up-line-or-history
-    [[ -z "$terminfo[cuf1]" ]] || bindkey -M viins "$terminfo[cuf1]" vi-forward-char
-    [[ -z "$terminfo[kcuu1]" ]] || bindkey -M viins "$terminfo[kcuu1]" vi-up-line-or-history
-    [[ -z "$terminfo[kcud1]" ]] || bindkey -M viins "$terminfo[kcud1]" vi-down-line-or-history
-    [[ -z "$terminfo[kcuf1]" ]] || bindkey -M viins "$terminfo[kcuf1]" vi-forward-char
-    [[ -z "$terminfo[kcub1]" ]] || bindkey -M viins "$terminfo[kcub1]" vi-backward-char
-
-# ncurses fogyatekos
-    [[ "$terminfo[kcuu1]" == "^[O"* ]] && bindkey -M viins "${terminfo[kcuu1]/O/[}" vi-up-line-or-history
-    [[ "$terminfo[kcud1]" == "^[O"* ]] && bindkey -M viins "${terminfo[kcud1]/O/[}" vi-down-line-or-history
-    [[ "$terminfo[kcuf1]" == "^[O"* ]] && bindkey -M viins "${terminfo[kcuf1]/O/[}" vi-forward-char
-    [[ "$terminfo[kcub1]" == "^[O"* ]] && bindkey -M viins "${terminfo[kcub1]/O/[}" vi-backward-char
-    [[ "$terminfo[khome]" == "^[O"* ]] && bindkey -M viins "${terminfo[khome]/O/[}" beginning-of-line
-    [[ "$terminfo[kend]" == "^[O"* ]] && bindkey -M viins "${terminfo[kend]/O/[}" end-of-line
-    [[ "$terminfo[khome]" == "^[O"* ]] && bindkey -M emacs "${terminfo[khome]/O/[}" beginning-of-line
-    [[ "$terminfo[kend]" == "^[O"* ]] && bindkey -M emacs "${terminfo[kend]/O/[}" end-of-line
-fi
-
 autoload -Uz promptinit
 promptinit
-prompt gentoo
+prompt walters
 
-PATH=$PATH:~/arm-none-eabi/bin:/opt/bin:~/bin:~/altera/13.1/quartus/bin:/sbin
-LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib:~/lib
-LD_PATH=$LD_PATH:/usr/local/lib:~/lib
+plugins=(git colored-man colorize vagrant virtualenv pip python osx zsh-syntax-highlighting)
 
-#export TERM=screen-256color
+PATH=$PATH:~/arm-none-eabi/bin:/opt/local/bin:~/bin
+LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/local/lib:~/lib
+LD_PATH=$LD_PATH:/opt/local/lib:~/lib
+
+. ~/.zsh_keybind
+
+. ~/erlang/R16/activate
