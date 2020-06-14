@@ -1,23 +1,8 @@
-;; -*- mode:lisp -*-
 
 (in-package :stumpwm)
 
-;; Load system tray
-(load "/home/grepz/source/common-lisp/stumpwm/contrib/stumptray.lisp")
-(load "/home/grepz/source/common-lisp/stumpwm/contrib/wifi-stat.lisp")
-(load "/home/grepz/source/common-lisp/stumpwm/contrib/weather.lisp")
-
-(setq *openweather-loc-defaults* '("Irkutsk,ru" "Shelehov,ru"))
-
 ;; change the prefix key to something else
 (set-prefix-key (kbd "C-t"))
-
-;; prompt the user for an interactive command. The first arg is an
-;; optional initial contents.
-(defcommand colon1 (&optional (initial "")) (:rest)
-  (let ((cmd (read-one-line (current-screen) ": " :initial-input initial)))
-    (when cmd
-      (eval-command cmd t))))
 
 ;; Message window font
 (set-font "-xos4-terminus-medium-r-normal--16-140-72-72-c-80-iso8859-15")
@@ -25,24 +10,8 @@
 (defcommand firefox () ()
   (run-or-raise "firefox" '(:class "Web")))
 
-(define-frame-preference "Emacs"
-    (1 t t :restore "emacs-editing-dump" :title "...xdvi")
-    (0 t t :create "emacs-dump" :class "Emacs"))
-
 ;; Window list format
 (setf *window-format* "^B%m%n^b %40t  ")
-
-;; width in pixels given to the borders of windows with maxsize or ratio
-;; hints
-(setf *maxsize-border-width* 1)
-;; width in pixels given to the borders of transient or pop-up windows
-(setf *transient-border-width* 1)
-;; width in pixels given to the borders of regular windows
-(setf *normal-border-width* 1)
-;; Set focus with mouse
-(setf *mouse-focus-policy* :click)
-
-;; Mode-line
 
 (defun show-time ()
   (multiple-value-bind (second minute hour date month year
@@ -52,20 +21,13 @@
 
 (setf stumpwm:*mode-line-timeout* 1)
 (setf stumpwm:*screen-mode-line-format*
-      (list "[^B%n^b] " "<^[^20" '(:eval (show-time)) "^]>, ^[^60%I^]: %W"))
+      (list "[^B%n^b] " "<^[^20" '(:eval (show-time)) "^]>, Battery: %B; %C ^[^60%I^]: %W"))
 
-(stumpwm:toggle-mode-line (stumpwm:current-screen) (stumpwm:current-head))
 
-;; Load swank
-(load "/usr/share/common-lisp/source/slime/swank-loader.lisp")
-(swank-loader:init)
-
-(defcommand swank () ()
-	    (swank:create-server :port 45555
-				 :style swank:*communication-style*
-				 :dont-close t)
-	    (echo-string (current-screen)
- "Starting swank. M-x slime-connect RET RET, then (in-package stumpwm)."))
+(define-key *root-map* (kbd "b")   "firefox")
+(define-key *root-map* (kbd "C-s") "colon1 exec urxvt -e ssh ")
+(define-key *root-map* (kbd "l")   "exec xtrlock")
+(define-key *root-map* (kbd "c")   "exec urxvt")
 
 ;; Use xev to get keysym's
 (define-keysym #x1008ff13 "XF86AudioRaiseVolume")
@@ -75,16 +37,26 @@
 (define-keysym #x1008ff02 "XF86MonBrightnessUp")
 (define-keysym #x1008ff03 "XF86MonBrightnessDown")
 
-(define-key *top-map* (kbd "XF86AudioLowerVolume") "exec amixer sset Master 5-")
-(define-key *top-map* (kbd "XF86AudioRaiseVolume") "exec amixer sset Master 5+")
+(define-key *top-map* (kbd "XF86AudioLowerVolume") "exec amixer sset Master 2000-")
+(define-key *top-map* (kbd "XF86AudioRaiseVolume") "exec amixer sset Master 2000+")
 (define-key *top-map* (kbd "XF86AudioMute") "exec amixer sset Master toggle")
 
 (define-key *top-map* (kbd "XF86MonBrightnessUp") "exec xbacklight -inc 30")
 (define-key *top-map* (kbd "XF86MonBrightnessDown") "exec xbacklight -dec 30")
 
-(define-key *top-map* (kbd "Print") "exec scrot")
+(gnew "devel")
+(gnew "term")
+(gnew "IM")
 
-(define-key *root-map* (kbd "b")   "firefox")
-(define-key *root-map* (kbd "C-s") "colon1 exec urxvt -e ssh ")
-(define-key *root-map* (kbd "l")   "exec xtrlock")
-(define-key *root-map* (kbd "c")   "exec urxvt")
+(ql:quickload "xembed")
+(ql:quickload "alexandria")
+
+(load-module "stumptray")
+(load-module "wifi")
+(load-module "battery-portable")
+(load-module "cpu")
+
+(stumpwm:toggle-mode-line (stumpwm:current-screen)
+                          (stumpwm:current-head))
+
+(stumptray::stumptray)
