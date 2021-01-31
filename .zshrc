@@ -1,6 +1,6 @@
 export ZSH=$HOME/.oh-my-zsh
 
-ZSH_THEME="af-magic"
+ZSH_THEME="ys"
 
 # Case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -36,7 +36,7 @@ DISABLE_AUTO_UPDATE="true"
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
-plugins=(git colored-man colorize vagrant virtualenv pip python osx zsh-syntax-highlighting sudo)
+plugins=(git colored-man-pages colorize vagrant virtualenv pip python sudo)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -59,22 +59,21 @@ bindkey -e
 # Autocd to dir when writing '/dir', no need to 'cd /dir'
 setopt autocd
 
-EMACS_FOR_OSX_DIR="/Applications/Emacs.app/Contents/MacOS"
-EMACS_FOR_OSX_BIN_DIR=$EMACS_FOR_OSX_DIR/bin
+# EMACS_FOR_OSX_DIR="/Applications/Emacs.app/Contents/MacOS"
+# EMACS_FOR_OSX_BIN_DIR=$EMACS_FOR_OSX_DIR/bin
 
 alias mmake='make -j4'
-alias emacs="${EMACS_FOR_OSX_DIR}/Emacs -nw"
-alias em="${EMACS_FOR_OSX_DIR}/Emacs -Q -nw"
-alias ctags="${EMACS_FOR_OSX_BIN_DIR}/ctags"
-alias ebrowse="${EMACS_FOR_OSX_BIN_DIR}/ebrowse"
-alias emacsclient="${EMACS_FOR_OSX_BIN_DIR}/emacsclient"
-alias etags="${EMACS_FOR_OSX_BIN_DIR}/etags"
+alias emacs="emacs -nw"
+alias em="emacs -Q -nw"
 alias ec="emacsclient -nw -c"
 
-PATH=$PATH:~/arm-none-eabi/bin:/opt/local/bin:/opt/local/sbin:~/bin:/opt/local/lib/mysql55/bin:/opt/local/lib/postgresql95/bin/:/opt/local/libexec/gnubin/:/Applications/Emacs.app/Contents/MacOS/bin/
+PATH=$PATH:/usr/sbin:~/arm-none-eabi/bin:/opt/local/bin:/opt/local/sbin:~/bin:~/.kiex/bin
 LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/local/lib:~/lib
 LD_PATH=$LD_PATH:/opt/local/lib:~/lib
 
 . $HOME/.zsh_keybind
-. $HOME/erlang/erlang/activate
-. $HOME/.cargo/env
+. $HOME/.asdf/asdf.sh
+
+fpath=(${ASDF_DIR}/completions $fpath)
+autoload -Uz compinit
+compinit
