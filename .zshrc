@@ -68,6 +68,8 @@ alias em="emacs -Q -nw"
 alias ec="emacsclient -nw -c"
 
 PATH=$PATH:/usr/sbin:~/arm-none-eabi/bin:/opt/local/bin:/opt/local/sbin:~/bin:~/.kiex/bin
+PATH=$PATH:/usr/local/bin
+PATH=$PATH:/opt/viber
 LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/local/lib:~/lib
 LD_PATH=$LD_PATH:/opt/local/lib:~/lib
 

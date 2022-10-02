@@ -1,21 +1,12 @@
-! для применения настроек в текущей сессии используйте `xrdb -load ~/.Xresources`
+URxvt.font:     xft:monaco:size=16:antialias=true
+URxvt.boldFont: xft:monaco:bold:size=16:antialias=true
 
-Xft.antialias: true
-Xft.dpi: 96
-Xft.rgba: none
-Xft.hinting: true
-Xft.hintstyle: hintslight
+URxvt.keysym.M-s: searchable-scrollback:start
 
-URxvt.perl-ext-common: default,tabbed,matcher
-
-URxvt.url-launcher: /usr/bin/chromium
 URxvt.matcher.button: 2
 URxvt.colorUL: #cacc46
 URxvt.underlineURLs: true
 URxvt.underlineColor: #cacc46
-
-URxvt.font: xft:Droid Sans Mono Slashed:pixelsize=13
-URxvt.boldFont: xft:Droid Sans Mono Slashed:bold
 
 URxvt.saveLines: 5000
 URxvt.geometry: 100x35
@@ -59,4 +50,20 @@ URxvt.tabbed.tabbar-bg: 0
 URxvt.tabbed.tab-fg: 3
 URxvt.tabbed.tab-bg: 0
 
-! URxvt.iconFile: /usr/share/pixmaps/terminal.xpm
+URxvt.keysym.Control-Left:        \033[1;5D
+URxvt.keysym.Shift-Control-Left:  \033[1;6D
+URxvt.keysym.Control-Right:       \033[1;5C
+URxvt.keysym.Shift-Control-Right: \033[1;6C
+URxvt.keysym.Control-Up:          \033[1;5A
+URxvt.keysym.Shift-Control-Up:    \033[1;6A
+URxvt.keysym.Control-Down:        \033[1;5B
+URxvt.keysym.Shift-Control-Down:  \033[1;6B
+
+URxvt.iso14755: false
+URxvt.iso14755_52: false
+
+URxvt.keysym.Control-Y: eval:paste_clipboard
+URxvt.keysym.Meta-W: eval:selection_to_clipboard
+URxvt.keysym.M-v: eval:paste_primary
+
+URxvt.perl-ext-common: selection-to-clipboard,tabbed,matcher

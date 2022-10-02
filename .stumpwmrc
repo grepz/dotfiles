@@ -1,14 +1,14 @@
-
 (in-package :stumpwm)
 
 ;; change the prefix key to something else
 (set-prefix-key (kbd "C-t"))
 
 ;; Message window font
-(set-font "-xos4-terminus-medium-r-normal--16-140-72-72-c-80-iso8859-15")
+;; (set-font "-xos4-terminus-medium-r-normal--16-140-72-72-c-80-iso8859-15")
+(set-font "monaco-15")
 
 (defcommand firefox () ()
-  (run-or-raise "firefox" '(:class "Web")))
+  (run-or-raise "firefox" '(:class "Default")))
 
 ;; Window list format
 (setf *window-format* "^B%m%n^b %40t  ")
@@ -28,6 +28,8 @@
 (define-key *root-map* (kbd "C-s") "colon1 exec urxvt -e ssh ")
 (define-key *root-map* (kbd "l")   "exec xtrlock")
 (define-key *root-map* (kbd "c")   "exec urxvt")
+(define-key *root-map* (kbd "c")   "exec urxvt")
+(define-key *root-map* (kbd "SunPrint_Screen")   "exec scrot -s -f ~/screenshots/%F_%H_%m_%S.png")
 
 ;; Use xev to get keysym's
 (define-keysym #x1008ff13 "XF86AudioRaiseVolume")
@@ -37,24 +39,30 @@
 (define-keysym #x1008ff02 "XF86MonBrightnessUp")
 (define-keysym #x1008ff03 "XF86MonBrightnessDown")
 
-(define-key *top-map* (kbd "XF86AudioLowerVolume") "exec amixer sset Master 2000-")
-(define-key *top-map* (kbd "XF86AudioRaiseVolume") "exec amixer sset Master 2000+")
+(define-key *top-map* (kbd "XF86AudioLowerVolume") "exec amixer sset Master 10000-")
+(define-key *top-map* (kbd "XF86AudioRaiseVolume") "exec amixer sset Master 10000+")
 (define-key *top-map* (kbd "XF86AudioMute") "exec amixer sset Master toggle")
 
 (define-key *top-map* (kbd "XF86MonBrightnessUp") "exec xbacklight -inc 30")
 (define-key *top-map* (kbd "XF86MonBrightnessDown") "exec xbacklight -dec 30")
 
-(gnew "devel")
 (gnew "term")
-(gnew "IM")
-
-(ql:quickload "xembed")
-(ql:quickload "alexandria")
+(gnew "devel")
+(gnew "video")
 
 (load-module "stumptray")
 (load-module "wifi")
 (load-module "battery-portable")
 (load-module "cpu")
+
+(define-frame-preference "Default"
+  (1 t t :class "Firefox"))
+
+(define-frame-preference "term"
+  (3 t t :class "URxvt"))
+
+(define-frame-preference "devel"
+  (2 t t :class "Emacs"))
 
 (stumpwm:toggle-mode-line (stumpwm:current-screen)
                           (stumpwm:current-head))
