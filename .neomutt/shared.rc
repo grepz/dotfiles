@@ -1,0 +1,14 @@
+## save copies of sent mail to $record
+set copy=yes
+
+# things I can't live without
+set sort = threads
+
+# if you have more than a few emails, you *really* want this
+set header_cache = ~/.neomutt/headercache
+set message_cachedir = ~/.neomutt/messagecache
+
+auto_view text/html
+
+set sendmail="/usr/bin/msmtp"
+macro pager \cb <pipe-entry>'w3m'<enter> 'Follow links with w3m'

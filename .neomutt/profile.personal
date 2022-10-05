@@ -1,0 +1,21 @@
+set hostname  = "fqdn.domain"
+
+set realname = "Real Name"
+set from = "user@fqdn.domain"
+set envelope_from = yes
+
+# personal account info
+set imap_user = "user@fqdn.domain"
+set imap_pass = "password"
+set folder = imaps://imap.fqdn.domain/
+
+# default mailboxes
+## this is google apps, these are the places to store bits
+set spoolfile = "=INBOX"
+set record = "=[Personal]/Sent Mail"
+set postponed = "=[Personal]/Drafts"
+
+color status white green
+
+# bring in the shared
+source ~/.neomutt/shared.rc

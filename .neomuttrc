@@ -1,0 +1,10 @@
+source ~/.neomutt/profile.personal
+folder-hook 'personal' 'source ~/.neomutt/profile.personal'
+source ~/.neomutt/profile.work
+folder-hook 'work' 'source ~/.neomutt/profile.work'
+
+account-hook 'user@fqdn\.domain@imap\.fqdn\.domain'  "source ~/.neomutt/profile.personal"
+#account-hook 'mailbox@domain2\.tld@imap\.provider2\.tld'  "source ~/.neomutt/neomuttrc-imap-2"
+
+macro index,pager <f2> '<sync-mailbox><enter-command>source ~/.neomutt/personal<enter><change-folder>!<enter>'
+macro index,pager <f3> '<sync-mailbox><enter-command>source ~/.neomutt/work<enter><change-folder>!<enter>'
