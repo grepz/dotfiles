@@ -21,7 +21,7 @@
 
 (setf stumpwm:*mode-line-timeout* 1)
 (setf stumpwm:*screen-mode-line-format*
-      (list "[^B%n^b] " "<^[^20" '(:eval (show-time)) "^]>, Battery: %B; %C ^[^60%I^]: %W"))
+      (list "[^B%n^b] " "<^[^20" '(:eval (show-time)) "^]>, Battery: %B; %C ^[^60%I^]: (%N) %W"))
 
 
 (define-key *root-map* (kbd "b")   "firefox")
@@ -39,8 +39,8 @@
 (define-keysym #x1008ff02 "XF86MonBrightnessUp")
 (define-keysym #x1008ff03 "XF86MonBrightnessDown")
 
-(define-key *top-map* (kbd "XF86AudioLowerVolume") "exec amixer sset Master 10000-")
-(define-key *top-map* (kbd "XF86AudioRaiseVolume") "exec amixer sset Master 10000+")
+(define-key *top-map* (kbd "XF86AudioLowerVolume") "exec amixer -c 0 sset Master 5-")
+(define-key *top-map* (kbd "XF86AudioRaiseVolume") "exec amixer -c 0 sset Master 5+")
 (define-key *top-map* (kbd "XF86AudioMute") "exec amixer sset Master toggle")
 
 (define-key *top-map* (kbd "XF86MonBrightnessUp") "exec xbacklight -inc 30")
@@ -54,6 +54,7 @@
 (load-module "wifi")
 (load-module "battery-portable")
 (load-module "cpu")
+(load-module "notifications")
 
 (define-frame-preference "Default"
   (1 t t :class "Firefox"))
@@ -63,6 +64,8 @@
 
 (define-frame-preference "devel"
   (2 t t :class "Emacs"))
+
+(define-key *root-map* (kbd "N") '*notifications-map*)
 
 (stumpwm:toggle-mode-line (stumpwm:current-screen)
                           (stumpwm:current-head))
