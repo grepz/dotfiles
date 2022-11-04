@@ -39,12 +39,12 @@
 (define-keysym #x1008ff02 "XF86MonBrightnessUp")
 (define-keysym #x1008ff03 "XF86MonBrightnessDown")
 
-(define-key *top-map* (kbd "XF86AudioLowerVolume") "exec amixer -c 0 sset Master 5-")
-(define-key *top-map* (kbd "XF86AudioRaiseVolume") "exec amixer -c 0 sset Master 5+")
-(define-key *top-map* (kbd "XF86AudioMute") "exec amixer sset Master toggle")
+(define-key *top-map* (kbd "XF86AudioLowerVolume") "exec pamixer -d 5")
+(define-key *top-map* (kbd "XF86AudioRaiseVolume") "exec pamixer -i 5")
+(define-key *top-map* (kbd "XF86AudioMute") "exec amixer -c 1 sset Master toggle")
 
-(define-key *top-map* (kbd "XF86MonBrightnessUp") "exec xbacklight -inc 30")
-(define-key *top-map* (kbd "XF86MonBrightnessDown") "exec xbacklight -dec 30")
+(define-key *top-map* (kbd "XF86MonBrightnessUp") "exec xbacklight -inc 5")
+(define-key *top-map* (kbd "XF86MonBrightnessDown") "exec xbacklight -dec 5")
 
 (gnew "term")
 (gnew "devel")
