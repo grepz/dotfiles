@@ -39,9 +39,12 @@
 (define-keysym #x1008ff02 "XF86MonBrightnessUp")
 (define-keysym #x1008ff03 "XF86MonBrightnessDown")
 
-(define-key *top-map* (kbd "XF86AudioLowerVolume") "exec pamixer -d 5")
-(define-key *top-map* (kbd "XF86AudioRaiseVolume") "exec pamixer -i 5")
-(define-key *top-map* (kbd "XF86AudioMute") "exec amixer -c 1 sset Master toggle")
+;; pamixer -d 5
+(define-key *top-map* (kbd "XF86AudioLowerVolume") "exec ~/bin/change_volume_and_show dec")
+;; pamixer -i 5
+(define-key *top-map* (kbd "XF86AudioRaiseVolume") "exec ~/bin/change_volume_and_show inc")
+;; pamixer -t
+(define-key *top-map* (kbd "XF86AudioMute") "exec pamixer -t")
 
 (define-key *top-map* (kbd "XF86MonBrightnessUp") "exec xbacklight -inc 5")
 (define-key *top-map* (kbd "XF86MonBrightnessDown") "exec xbacklight -dec 5")
