@@ -40,14 +40,16 @@
 (define-keysym #x1008ff03 "XF86MonBrightnessDown")
 
 ;; pamixer -d 5
-(define-key *top-map* (kbd "XF86AudioLowerVolume") "exec ~/bin/change_volume_and_show dec")
+(define-key *top-map* (kbd "XF86AudioLowerVolume") "exec ~/bin/run_command_and_show 'pamixer -d 5' 'pamixer --get-volume'")
 ;; pamixer -i 5
-(define-key *top-map* (kbd "XF86AudioRaiseVolume") "exec ~/bin/change_volume_and_show inc")
+(define-key *top-map* (kbd "XF86AudioRaiseVolume") "exec ~/bin/run_command_and_show 'pamixer -i 5' 'pamixer --get-volume'")
 ;; pamixer -t
 (define-key *top-map* (kbd "XF86AudioMute") "exec pamixer -t")
 
-(define-key *top-map* (kbd "XF86MonBrightnessUp") "exec xbacklight -inc 5")
-(define-key *top-map* (kbd "XF86MonBrightnessDown") "exec xbacklight -dec 5")
+(define-key *top-map* (kbd "XF86MonBrightnessUp") "exec ~/bin/run_command_and_show 'xbacklight -inc 5' 'xbacklight'")
+(define-key *top-map* (kbd "XF86MonBrightnessDown") "exec ~/bin/run_command_and_show 'xbacklight -dec 5' 'xbacklight'")
+;;(define-key *top-map* (kbd "XF86MonBrightnessUp") "exec xbacklight -inc 5")
+;;(define-key *top-map* (kbd "XF86MonBrightnessDown") "exec xbacklight -dec 5")
 
 (gnew "term")
 (gnew "devel")
