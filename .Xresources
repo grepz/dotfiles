@@ -67,3 +67,8 @@ URxvt.keysym.Meta-W: eval:selection_to_clipboard
 URxvt.keysym.M-v: eval:paste_primary
 
 URxvt.perl-ext-common: selection-to-clipboard,tabbed,matcher
+
+## Do not allow scrolling when output happens
+URxvt*scrollTtyOutput:      false
+URxvt*scrollWithBuffer:     true
+URxvt*scrollTtyKeypress:    true
