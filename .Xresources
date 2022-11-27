@@ -1,7 +1,10 @@
 URxvt.font:     xft:monaco:size=16:antialias=true
 URxvt.boldFont: xft:monaco:bold:size=16:antialias=true
 
-URxvt.keysym.M-s: searchable-scrollback:start
+URxvt.perl-ext-common: default,selection-to-clipboard,tabbed,matcher
+
+URxvt.keysym.CM-s: searchable-scrollback:start
+URxvt.keysym.M-s: builtin:
 
 URxvt.matcher.button: 2
 URxvt.colorUL: #cacc46
@@ -66,9 +69,7 @@ URxvt.keysym.Control-Y: eval:paste_clipboard
 URxvt.keysym.Meta-W: eval:selection_to_clipboard
 URxvt.keysym.M-v: eval:paste_primary
 
-URxvt.perl-ext-common: selection-to-clipboard,tabbed,matcher
-
-## Do not allow scrolling when output happens
+! Do not allow scrolling when output happens
 URxvt*scrollTtyOutput:      false
 URxvt*scrollWithBuffer:     true
 URxvt*scrollTtyKeypress:    true
