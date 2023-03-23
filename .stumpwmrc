@@ -1,7 +1,12 @@
+;; -*- Mode:Common-Lisp; coding: utf-8-emacs; -*-
+
 (in-package :stumpwm)
 
 ;; change the prefix key to something else
 (set-prefix-key (kbd "C-t"))
+
+(setf *mouse-focus-policy*    :click
+      *float-window-modifier* :SUPER)
 
 ;; Message window font
 ;; (set-font "-xos4-terminus-medium-r-normal--16-140-72-72-c-80-iso8859-15")
@@ -74,5 +79,4 @@
 
 (stumpwm:toggle-mode-line (stumpwm:current-screen)
                           (stumpwm:current-head))
-
 (stumptray::stumptray)
