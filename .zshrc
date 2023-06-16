@@ -70,12 +70,29 @@ alias ec="emacsclient -nw -c"
 PATH=$PATH:/usr/sbin:~/arm-none-eabi/bin:/opt/local/bin:/opt/local/sbin:~/bin:~/.kiex/bin
 PATH=$PATH:/usr/local/bin
 PATH=$PATH:/opt/viber
+PATH=$PATH:~/local/bin
 LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/local/lib:~/lib
 LD_PATH=$LD_PATH:/opt/local/lib:~/lib
 
 . $HOME/.zsh_keybind
 . $HOME/.asdf/asdf.sh
 
+eval $(ssh-agent -s)
+
 fpath=(${ASDF_DIR}/completions $fpath)
 autoload -Uz compinit
 compinit
+
+# IntelliShell
+INTELLI_HOME=/home/grepz/.local/share/intelli-shell
+# export INTELLI_SEARCH_HOTKEY=\C-@
+# export INTELLI_LABEL_HOTKEY=C-l
+# export INTELLI_SAVE_HOTKEY=C-b
+# export INTELLI_SKIP_ESC_BIND=0
+alias intelli-shell="$HOME/bin/intelli-shell"
+source $INTELLI_HOME/bin/intelli-shell.sh
+
+export GUIX_LOCPATH="$HOME/.guix-profile/lib/locale"
+export GUIX_PROFILE="$HOME/.guix-profile"
+
+source "$GUIX_PROFILE/etc/profile"

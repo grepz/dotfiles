@@ -34,6 +34,8 @@
 (define-key *root-map* (kbd "l")   "exec xtrlock")
 (define-key *root-map* (kbd "c")   "exec urxvt")
 (define-key *root-map* (kbd "c")   "exec urxvt")
+(define-key *root-map* (kbd "f")   "float-this")
+(define-key *root-map* (kbd "u")   "unfloat-this")
 (define-key *root-map* (kbd "SunPrint_Screen")   "exec scrot -s -f ~/screenshots/%F_%H_%m_%S.png")
 
 ;; Use xev to get keysym's
@@ -69,8 +71,8 @@
 (define-frame-preference "Default"
   (1 t t :class "Firefox"))
 
-(define-frame-preference "term"
-  (3 t t :class "URxvt"))
+;; (define-frame-preference "term"
+;;   (3 t t :class "URxvt"))
 
 (define-frame-preference "devel"
   (2 t t :class "Emacs"))
