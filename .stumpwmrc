@@ -8,6 +8,10 @@
 (setf *mouse-focus-policy*    :click
       *float-window-modifier* :SUPER)
 
+;; Enable debug
+;; (setf *debug-level* 3
+;;       *debug-expose-events* t)
+
 ;; Message window font
 ;; (set-font "-xos4-terminus-medium-r-normal--16-140-72-72-c-80-iso8859-15")
 (set-font "monaco-15")
