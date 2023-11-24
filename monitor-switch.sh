@@ -1,5 +1,9 @@
 #!/bin/env bash
 
+## NOTE: File should be used in udev rules:
+## $ cat /etc/udev/rules.d/90-monitor.rules
+## KERNEL=="card0", ACTION=="change", SUBSYSTEM=="drm", RUN+="/path/to/monitor-switch.sh"
+
 if [ "$1" != "forked" ]; then
     echo "$(dirname $0)/$(basename $0) forked" | at now
     exit
