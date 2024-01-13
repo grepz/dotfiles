@@ -1,0 +1,14 @@
+#!/bin/env sh
+
+if [ "$1" = "inc" ]; then
+    pamixer -i 5
+elif [ "$1" = "dec" ]; then
+    pamixer -d 5
+fi
+
+vol=$(pamixer --get-volume)
+p=$((vol/10))
+np=$((10 - p))
+tp=$(printf "%${p}s" | tr " " "=")
+tnp=$(printf "%${np}s")
+printf '|%s%s|%3s%%' "$tp" "$tnp" "$vol" | aosd_cat -n "DejaVu Sans Mono 60" -u 500 -p 2 -y 50 -x -10  -f 0 -o 0 -t 0
