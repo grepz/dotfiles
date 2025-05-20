@@ -35,7 +35,7 @@
 
 (define-key *root-map* (kbd "b")   "firefox")
 (define-key *root-map* (kbd "C-s") "colon1 exec urxvt -e ssh ")
-(define-key *root-map* (kbd "l")   "exec xtrlock")
+(define-key *root-map* (kbd "l")   "exec xsecurelock")
 (define-key *root-map* (kbd "c")   "exec urxvt")
 (define-key *root-map* (kbd "c")   "exec urxvt")
 (define-key *root-map* (kbd "f")   "float-this")
@@ -59,8 +59,6 @@
 
 (define-key *top-map* (kbd "XF86MonBrightnessUp") "exec ~/bin/run_command_and_show 'xbacklight -inc 5' 'xbacklight'")
 (define-key *top-map* (kbd "XF86MonBrightnessDown") "exec ~/bin/run_command_and_show 'xbacklight -dec 5' 'xbacklight'")
-;;(define-key *top-map* (kbd "XF86MonBrightnessUp") "exec xbacklight -inc 5")
-;;(define-key *top-map* (kbd "XF86MonBrightnessDown") "exec xbacklight -dec 5")
 
 (gnew "term")
 (gnew "devel")

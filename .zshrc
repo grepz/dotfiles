@@ -67,7 +67,7 @@ alias emacs="emacs -nw"
 alias em="emacs -Q -nw"
 alias ec="emacsclient -nw -c"
 
-PATH=$PATH:/usr/sbin:~/arm-none-eabi/bin:/opt/local/bin:/opt/local/sbin:~/bin:~/.kiex/bin
+PATH=$PATH:/usr/sbin:~/arm-none-eabi/bin:/opt/local/bin:/opt/local/sbin:~/bin:~/.kiex/bin:~/bin/wg
 PATH=$PATH:/usr/local/bin
 PATH=$PATH:/opt/viber
 PATH=$PATH:~/local/bin
@@ -92,7 +92,7 @@ INTELLI_HOME=/home/grepz/.local/share/intelli-shell
 alias intelli-shell="$HOME/bin/intelli-shell"
 source $INTELLI_HOME/bin/intelli-shell.sh
 
-export GUIX_LOCPATH="$HOME/.guix-profile/lib/locale"
-export GUIX_PROFILE="$HOME/.guix-profile"
+# export GUIX_LOCPATH="$HOME/.guix-profile/lib/locale"
+# export GUIX_PROFILE="$HOME/.guix-profile"
 
-source "$GUIX_PROFILE/etc/profile"
+# source "$GUIX_PROFILE/etc/profile"
