@@ -71,6 +71,7 @@ PATH=$PATH:/usr/sbin:~/arm-none-eabi/bin:/opt/local/bin:/opt/local/sbin:~/bin:~/
 PATH=$PATH:/usr/local/bin
 PATH=$PATH:/opt/viber
 PATH=$PATH:~/local/bin
+PATH=$PATH:~/.krew/bin
 LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/local/lib:~/lib
 LD_PATH=$LD_PATH:/opt/local/lib:~/lib
 

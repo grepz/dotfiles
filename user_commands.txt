@@ -1,0 +1,43 @@
+ssh -i{{ssh_key}} -D localhost:{{port}} {{host}} ## Open local SOCKS port to use in browser
+ss -ntape '( {{sport|dport}} = {{8022}} )' ## Show sockets that has inbound/outbound port
+sudo lsof -i {{tcp:8022}} ## Show information about processes that listens to a certain port
+inxi -F ## System information by inxi, FULL output
+git push --delete origin {{tagname}} ## Delete git tag remotely
+git tag -d {{tagname}} ## Delete tag locally
+ps -eo pmem,pcpu,vsize,pid,cmd | sort -k {{column}} -nr | head -{{number}} ## Show top N processes, sorted by mem/cpu/vsize(1,2,3)
+qemu-system-x86_64 -m {{memory_in_megabytes}} -hda {{path/to/qemu.image}} -enable-kvm -nographic -nic user,hostfwd={{tcp::8222-:22,hostfwd=tcp::15672-:15672,hostfwd=tcp::5672-:5672,hostfwd=tcp::5432-:5432}} ## Run qemu, opening some ports to host system
+dd if=/dev/urandom of={{path/to/random_file}} bs={{100}} count={{1}} ## Generate 100 random bytes
+date -d '06/12/2013 01:01:01' +"%s" ## Convert date to unix time
+qemu-system-x86_64 -cdrom {{/path/to/iso}} -hda {{/path/to/qemu.image}} -boot d -m {{memory_in_megabytes}} ## Run qemu, starting a system from cdrom
+ss -ntape -l ## Show listening sockets
+git log {{branch1}}..{{branch2}} -p --stat -- {{file}} ## Get all commits and diffs for a specifc file between git branches
+curl -v -H 'Content-Type: application/json' -H 'Accept: application/json' -X POST http://localhost:{{8001}}/v2/transaction/{{apply}} -d@{{trx_apply_prem1.json}} | python -m json.tool ## Create DEPOT transaction
+sudo nmcli dev wifi connect {{ssid}} password {{password}} ## Connect to a WIFI hotspot
+pacmd set-default-sink {{index}} ## Set default PulseAudio sink
+ps -fp $(pgrep -d, -x {{name}}) ## Give information on processes by name
+lxrandr  ## Chnage display's configuration
+sysctl fs.file-nr ## How many file handles are opened right now?
+sysctl -p ## Apply changes
+awk -F '{{delimiter}}' '/1/ {print {{column_number}}}' ## Delimit file with delimiter and print certain column number
+date -d @1370988061 ## Convert unix time to date
+date +%s  ## Current date in unix time
+dpkg-query -W --showformat='${binary:Package}: ${db:Status-Status}\n' '{{package-name}}*' ## Search for package in dpkg databae, output its actual name and status
+strace -e write -p {{pid}} ## Read process output
+tail -f /proc/{{pid}}/fd/1 ## Read process stdout
+dwebp {{filename.webp}} -o {{filename.png}} ## Convert from webp format to png
+find . -name '{{filename}}'  -exec {{command}} {} \; ## Find file by mask and exec command on each finding
+while true; do { echo -e 'HTTP/1.1 200 OK\r\n'; echo -e 'test test test\r\n'; } | nc -l {{port}}; done ## Netcat simple HTTP server
+dpkg-query -Wf '${Installed-Size}\t${Package}\n' ## Get all installed packages and their sizes
+blueman-manager ## Bluetooth device manager graphical interface
+dd if={{/dev/drive_device}} of={{path/to/file.img}} status=progress ## Generate image from a device
+dd if={{path/to/file.img}} of={{/dev/drive_device}} status=progress ## Write image to a device
+sysctl -a ## Show all available options
+sysctl -w {{section.tunable}}={{value}} ## Set certain option to a value
+apt-file {{search|find}} {{partial_path/to/file}} ## Search for package that contains certain file
+apt-file {{show|list}} {{package_name}} ## Show package files
+apt-file {{search|find}} --regexp {{regular_expression}} ## Search package that contains files that is choosen by regular expression
+qemu-img create {{/path/to/image}} {{60G}} ## Create qemu image, setting path and its initial size
+pacmd list-sinks ## List PulseAudio sinks
+tc qdisc add dev {{ned_dev}} root netem delay {{delay_in_ms}} ## Add delay to all incoming packets on interface
+git reset $(git merge-base master {{branchname}}) ## Git squash-rebase
+powertop ## Power consumption top
