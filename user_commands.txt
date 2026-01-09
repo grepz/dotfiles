@@ -41,3 +41,6 @@ pacmd list-sinks ## List PulseAudio sinks
 tc qdisc add dev {{ned_dev}} root netem delay {{delay_in_ms}} ## Add delay to all incoming packets on interface
 git reset $(git merge-base master {{branchname}}) ## Git squash-rebase
 powertop ## Power consumption top
+vmstat --disk {{interval}} {{ntimes}} ## Monitor disk activity with interval and repeat N times
+iostat --pretty -x {{disk}} -d {{interval}} ## Monitor disk activity for interval of seconds
+iotop -oa ## Show accumulated disk usage with regards to threads
